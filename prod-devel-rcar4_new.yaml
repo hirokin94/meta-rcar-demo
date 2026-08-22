@@ -355,9 +355,12 @@ parameters:
                 - "../meta-sparrow-hawk"
           domd:
             sources:
+              # Fork of rcar-community/meta-sparrow-hawk with OP-TEE support
+              # (V4H OP-TEE OS + optee-client + SPD=opteed TF-A bbappend)
+              # sodev-optee branch = v2026-01-30 baseline + OP-TEE commit
               - type: git
-                url: https://github.com/automotive-grade-linux/meta-sparrow-hawk
-                rev: sodev_stable
+                url: https://github.com/hirokin94/meta-sparrow-hawk
+                rev: sodev-optee
             builder:
               layers:
                 - "../meta-sparrow-hawk"

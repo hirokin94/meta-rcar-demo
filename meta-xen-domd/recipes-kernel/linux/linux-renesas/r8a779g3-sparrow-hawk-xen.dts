@@ -16,5 +16,20 @@
 		       0x4 0x80000000 0x0 0x80000000
 		       0x6 0x00000000 0x1 0x00000000>;
 	};
+
+	/*
+	 * OP-TEE firmware node.
+	 * Consumed by Xen (with tee=optee bootarg) so that it can mediate
+	 * OP-TEE SMC calls from Dom0/DomD. Xen then presents an equivalent
+	 * node to Dom0 automatically. The secure DRAM region (first 128MB
+	 * of DRAM, 0x40000000-0x48000000) is already excluded from the
+	 * memory node above and used by BL31/BL32 (TF-A + OP-TEE OS).
+	 */
+	firmware {
+		optee {
+			compatible = "linaro,optee-tz";
+			method = "smc";
+		};
+	};
 };
 

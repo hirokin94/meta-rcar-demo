@@ -5,6 +5,10 @@ inherit deploy
 inherit externalsrc
 EXTERNALSRC_SYMLINKS = ""
 
+# OP-TEE client tools for Dom0: tee-supplicant, libteec, xtest helpers.
+# Provided by meta-sparrow-hawk (recipes-bsp/optee/optee-client_git.bb).
+IMAGE_INSTALL:append = " optee-client"
+
 generate_uboot_image() {
     uboot-mkimage -A arm64 -O linux -T ramdisk -C gzip -n "uInitramfs" \
         -d ${IMGDEPLOYDIR}/${IMAGE_NAME}.cpio.gz  ${IMGDEPLOYDIR}/${IMAGE_NAME}.cpio.gz.uInitramfs

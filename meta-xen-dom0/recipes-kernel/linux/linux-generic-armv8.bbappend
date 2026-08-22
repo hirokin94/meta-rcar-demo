@@ -6,5 +6,6 @@ require recipes-kernel/linux/kernel_6.12.inc
 SRC_URI = "\
     ${REPO};branch=${BRANCH};protocol=https \
     file://defconfig \
+    file://optee.cfg \
 "
 

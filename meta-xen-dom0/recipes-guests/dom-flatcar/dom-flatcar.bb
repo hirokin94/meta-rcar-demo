@@ -1,5 +1,5 @@
 SUMMARY = "Flatcar Container Linux guest domain"
-DESCRIPTION = "Config files and kernel for Flatcar guest domain"
+DESCRIPTION = "Config files and UEFI firmware for Flatcar guest domain"
 
 PV = "0.1"
 LICENSE = "MIT"
@@ -17,7 +17,7 @@ SRC_URI = "\
 
 FILES:${PN} = " \
     ${sysconfdir}/xen/dom-flatcar.cfg \
-    ${libdir}/xen/boot/linux-flatcar \
+    ${libdir}/xen/boot/XEN_EFI.fd \
     ${systemd_unitdir}/system/dom-flatcar.service \
     ${sysconfdir}/systemd/system/dom-flatcar.service.d/virtio-env.conf \
 "
@@ -30,10 +30,9 @@ do_install() {
     install -d ${D}${sysconfdir}/xen
     install -m 0644 ${WORKDIR}/dom-flatcar-virtio.cfg ${D}${sysconfdir}/xen/dom-flatcar.cfg
 
-    # Flatcar kernel
-    # install vmlinuz-a in the directory specified by EXTERNALSRC as linux-flatcar
+    # UEFI firmware (EDK2 ArmVirtXen)
     install -d ${D}${libdir}/xen/boot
-    install -m 0644 ${S}/vmlinuz-a ${D}${libdir}/xen/boot/linux-flatcar
+    install -m 0644 ${S}/XEN_EFI.fd ${D}${libdir}/xen/boot/XEN_EFI.fd
 
     # systemd services
     install -d ${D}${systemd_unitdir}/system
